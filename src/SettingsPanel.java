@@ -11,14 +11,18 @@ public class SettingsPanel extends JPanel {
     JPanel gamePanel = new JPanel();
     JPanel difficultyPanel = new JPanel();
     JPanel gameSettingsPanel = new JPanel();
+    MyFrame frame;
 
 
-    SettingsPanel() {
+
+    SettingsPanel(MyFrame frame) {
+        this.frame = frame;
         gamePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 10));
         difficultyPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         difficultyPanel.setBorder(BorderFactory.createEmptyBorder(30, 0, 0, 0));
         difficultyPanel.setPreferredSize(new Dimension(750, 60));
         gameSettingsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
+        gameSettingsPanel.setPreferredSize(new Dimension(750,90));
 
         render();
 
@@ -32,8 +36,8 @@ public class SettingsPanel extends JPanel {
         for (GameTypes gameTypes : GameTypes.values()) {
             JLabel label = new JLabel(gameTypes.getName());
             label.setPreferredSize(new Dimension(200, 80));
-            label.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-            if (label.getText() == Utils.selectedGame) label.setBorder(BorderFactory.createLineBorder(Color.GREEN, 5));
+            label.setBorder(BorderFactory.createLineBorder( new Color(206,2,0),2));
+            if (label.getText() == Utils.selectedGame) label.setBorder(BorderFactory.createLineBorder(new Color(54,237,16),5));
             label.setHorizontalAlignment(JLabel.CENTER);
             label.setFont(new Font("Arial", Font.PLAIN, 24));
             label.addMouseListener(new MouseAdapter() {
@@ -47,7 +51,7 @@ public class SettingsPanel extends JPanel {
         }
         for (Difficulty difficulty : Difficulty.values()) {
             JButton button = new JButton(difficulty.name());
-            if (button.getText() == Utils.selectedDifficulty.toString()) button.setBackground(Color.GREEN);
+            if (button.getText() == Utils.selectedDifficulty.toString()) button.setBackground(new Color(54,237,16));
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -88,6 +92,15 @@ public class SettingsPanel extends JPanel {
         add(gamePanel);
         add(difficultyPanel);
         add(gameSettingsPanel);
+        JButton startButton = new JButton("Start");
+        startButton.setBackground(new Color(54,237,16));
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                startingGame();
+            }
+        });
+        add(startButton);
         revalidate();
         repaint();
     }
@@ -99,6 +112,18 @@ public class SettingsPanel extends JPanel {
 
     private void selectDifficulty(JButton button) {
         Utils.selectedDifficulty = Difficulty.valueOf(button.getText());
+        if (button.getText()==Difficulty.EASY.toString()){
+            Utils.settings[0].setValue(6);
+            Utils.settings[1].setValue(5.5);
+        }
+        if (button.getText()==Difficulty.MEDIUM.toString()){
+            Utils.settings[0].setValue(4);
+            Utils.settings[1].setValue(3.5);
+        }
+        if (button.getText()==Difficulty.HARD.toString()){
+            Utils.settings[0].setValue(2);
+            Utils.settings[1].setValue(1.5);
+        }
         render();
     }
 
@@ -117,12 +142,20 @@ public class SettingsPanel extends JPanel {
     private void changeSettingsUp(Settings settings) {
         Utils.selectedDifficulty = Difficulty.CUSTOM;
         if (settings.getValue() >= settings.getMax()) return;
-        if (settings.getName() == "Lives") settings.setValue(settings.getValue() + 1);
-        if (settings.getName() == "Targets per Seconds") {
+        if (settings.isTotal()) settings.setValue(settings.getValue() + 1);
+        else  {
             BigDecimal decimal = new BigDecimal(String.valueOf(settings.getValue()));
 
             settings.setValue(decimal.add(new BigDecimal("0.10")).doubleValue());
         }
         render();
     }
+    private void startingGame(){
+        frame.setState(Frame.ICONIFIED);
+        GameFrame gameFrame = new GameFrame();
+
+
+    }
+
+
 }
