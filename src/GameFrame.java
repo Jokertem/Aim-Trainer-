@@ -29,12 +29,17 @@ public class GameFrame extends JFrame {
         header2.setFont(new Font("Arial",Font.PLAIN,18));
         topPanel.add(header1);
         topPanel.add(header2);
-        infoPanel.setLayout(new FlowLayout(FlowLayout.CENTER,300,10));
+        infoPanel.setLayout(new FlowLayout(FlowLayout.CENTER,100,0));
         infoPanel.setPreferredSize(new Dimension(900,50));
         JLabel timerLabel = new JLabel("Timer");
         JLabel livesLabel = new JLabel("Lives: " + (int)Utils.settings[0].getValue());
+        JLabel targetLabel = new JLabel("Target: " + Utils.targets);
         timerLabel.setFont(new Font("Arial",Font.PLAIN,19));
         livesLabel.setFont(new Font("Arial",Font.PLAIN,19));
+        targetLabel.setFont(new Font("Arial",Font.PLAIN,19));
+
+
+        infoPanel.add(targetLabel);
         infoPanel.add(timerLabel);
         infoPanel.add(livesLabel);
         topPanel.add(infoPanel);
@@ -52,9 +57,8 @@ public class GameFrame extends JFrame {
 
 
         if (Utils.selectedGame== GameTypes.CLASSIC.getName()){
-            ClassicGame classicGame = new ClassicGame();
+            ClassicGame classicGame = new ClassicGame(livesLabel,targetLabel);
             centerPanel.add(classicGame);
-            System.out.println(topPanel.getSize());
 
         }
     }

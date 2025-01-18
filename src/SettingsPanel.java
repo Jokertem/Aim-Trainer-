@@ -102,7 +102,7 @@ public class SettingsPanel extends JPanel {
         });
         add(startButton);
         revalidate();
-        repaint();
+
     }
 
     private void selectGame(JLabel label) {
@@ -114,15 +114,15 @@ public class SettingsPanel extends JPanel {
         Utils.selectedDifficulty = Difficulty.valueOf(button.getText());
         if (button.getText()==Difficulty.EASY.toString()){
             Utils.settings[0].setValue(6);
-            Utils.settings[1].setValue(5.5);
+            Utils.settings[1].setValue(1);
         }
         if (button.getText()==Difficulty.MEDIUM.toString()){
             Utils.settings[0].setValue(4);
-            Utils.settings[1].setValue(3.5);
+            Utils.settings[1].setValue(3);
         }
         if (button.getText()==Difficulty.HARD.toString()){
             Utils.settings[0].setValue(2);
-            Utils.settings[1].setValue(1.5);
+            Utils.settings[1].setValue(5);
         }
         render();
     }
