@@ -3,6 +3,7 @@ import java.awt.*;
 
 public class MyFrame extends JFrame {
     ImageIcon logo = new ImageIcon(getClass().getResource("/targets/Target1.png"));
+
     MyFrame() {
         setTitle("Aim Trainer");
         setBounds(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 750 / 2,
