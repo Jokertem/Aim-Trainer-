@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -11,6 +12,7 @@ public class ClassicGame extends JComponent {
     ArrayList<Target> targets = new ArrayList<>();
     double livesValue = Utils.settings[0].getValue();
     int targetValue = 0;
+    double delay = Utils.settings[1].getValue();
     boolean start = false;
     Timer spawn;
     Timer game;
@@ -18,19 +20,22 @@ public class ClassicGame extends JComponent {
     ClassicGame(JLabel lives, JLabel target) {
         this.livesLabel = lives;
         this.targetLabel = target;
-        spawn = new Timer(600, new ActionListener() {
+        spawn = new Timer(10, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (start) {
-                    for (int i = 0; i < Utils.settings[1].getValue(); i++) {
+                    BigDecimal decimal = new BigDecimal(String.valueOf(delay));
+                    delay = decimal.subtract(new BigDecimal("0.1")).doubleValue();
+                    if (delay <=0) {
                         int randomX = random.nextInt(getBounds().width);
                         if (randomX + 64 > getBounds().width) randomX -= 64;
                         int randomY = random.nextInt(getBounds().height);
                         if (randomY + 64 > getBounds().height) randomY -= 64;
                         Target target = new Target(randomX, randomY, 1);
                         targets.add(target);
-
+                        delay = Utils.settings[1].getValue();
                     }
+
                 }
 
                 repaint();
@@ -74,6 +79,7 @@ public class ClassicGame extends JComponent {
                     targetLabel.setText("Target: " + Utils.targets);
                     livesValue = Utils.settings[0].getValue();
                     livesLabel.setText("Lives: " + (int) livesValue);
+                    delay = Utils.settings[1].getValue();
                     start = true;
                 }
 

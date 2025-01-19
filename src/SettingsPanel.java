@@ -113,16 +113,16 @@ public class SettingsPanel extends JPanel {
     private void selectDifficulty(JButton button) {
         Utils.selectedDifficulty = Difficulty.valueOf(button.getText());
         if (button.getText() == Difficulty.EASY.toString()) {
-            Utils.settings[0].setValue(6);
-            Utils.settings[1].setValue(1);
+            Utils.settings[0].setValue(5);
+            Utils.settings[1].setValue(4.6);
         }
         if (button.getText() == Difficulty.MEDIUM.toString()) {
-            Utils.settings[0].setValue(4);
-            Utils.settings[1].setValue(3);
+            Utils.settings[0].setValue(3);
+            Utils.settings[1].setValue(3.5);
         }
         if (button.getText() == Difficulty.HARD.toString()) {
             Utils.settings[0].setValue(2);
-            Utils.settings[1].setValue(5);
+            Utils.settings[1].setValue(2.8);
         }
         render();
     }
@@ -153,7 +153,7 @@ public class SettingsPanel extends JPanel {
 
     private void startingGame() {
         frame.setState(Frame.ICONIFIED);
-        GameFrame gameFrame = new GameFrame();
+        GameFrame gameFrame = new GameFrame(frame);
 
 
     }

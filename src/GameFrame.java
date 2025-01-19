@@ -1,12 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class GameFrame extends JFrame {
     ImageIcon logo = new ImageIcon(getClass().getResource("/targets/Target1.png"));
     JPanel topPanel = new JPanel();
     JPanel infoPanel = new JPanel();
-
-    GameFrame() {
+MyFrame frame;
+    GameFrame(MyFrame frame) {
+        this.frame = frame;
         setTitle("Aim Trainer");
         setBounds(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 900 / 2,
                 Toolkit.getDefaultToolkit().getScreenSize().height / 2 - 700 / 2, 900, 700);
@@ -50,7 +53,15 @@ public class GameFrame extends JFrame {
             classicGame.setBounds(this.getBounds().width / 2 - 800 / 2, 130, 800, 500);
             add(classicGame);
 
+
         }
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                frame.setState(Frame.NORMAL);
+            }
+        });
     }
 
 }
