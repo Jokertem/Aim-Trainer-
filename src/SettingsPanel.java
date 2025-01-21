@@ -61,9 +61,11 @@ public class SettingsPanel extends JPanel {
             difficultyPanel.add(button);
         }
         for (Settings settings : Utils.settings) {
-//            if (Utils.selectedGame ==GameTypes.CLASSIC.getName()){
-//                if (settings.getName()=="Lives") continue;
-//            }
+            if (Utils.selectedGame == GameTypes.CLASSIC.getName()) {
+                if (settings.getName() == "Target Duration") continue;
+            } else if (Utils.selectedGame == GameTypes.DOUBLESHOT.getName()) {
+                if (settings.getName() == "Target Delay") continue;
+            }
             JPanel settingsPanel = new JPanel();
             JLabel label = new JLabel(settings.getName());
             JButton buttonDec = new JButton("-");
@@ -115,14 +117,17 @@ public class SettingsPanel extends JPanel {
         if (button.getText() == Difficulty.EASY.toString()) {
             Utils.settings[0].setValue(5);
             Utils.settings[1].setValue(4.6);
+            Utils.settings[2].setValue(4.0);
         }
         if (button.getText() == Difficulty.MEDIUM.toString()) {
             Utils.settings[0].setValue(3);
             Utils.settings[1].setValue(3.5);
+            Utils.settings[2].setValue(3.6);
         }
         if (button.getText() == Difficulty.HARD.toString()) {
             Utils.settings[0].setValue(2);
             Utils.settings[1].setValue(2.8);
+            Utils.settings[2].setValue(1.8);
         }
         render();
     }

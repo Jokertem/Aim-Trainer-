@@ -14,6 +14,7 @@ public class MyFrame extends JFrame {
         add(new SettingsPanel(this));
     }
 
+
     public static void main(String[] args) {
         MyFrame frame = new MyFrame();
         frame.setVisible(true);

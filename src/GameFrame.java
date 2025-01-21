@@ -7,7 +7,8 @@ public class GameFrame extends JFrame {
     ImageIcon logo = new ImageIcon(getClass().getResource("/targets/Target1.png"));
     JPanel topPanel = new JPanel();
     JPanel infoPanel = new JPanel();
-MyFrame frame;
+    MyFrame frame;
+
     GameFrame(MyFrame frame) {
         this.frame = frame;
         setTitle("Aim Trainer");
@@ -53,8 +54,12 @@ MyFrame frame;
             classicGame.setBounds(this.getBounds().width / 2 - 800 / 2, 130, 800, 500);
             add(classicGame);
 
-
+        } else if (Utils.selectedGame == GameTypes.DOUBLESHOT.getName()) {
+            DoubleShoot doubleShoot = new DoubleShoot(livesLabel, targetLabel);
+            doubleShoot.setBounds(this.getBounds().width / 2 - 800 / 2, 130, 800, 500);
+            add(doubleShoot);
         }
+
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {

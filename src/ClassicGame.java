@@ -26,7 +26,7 @@ public class ClassicGame extends JComponent {
                 if (start) {
                     BigDecimal decimal = new BigDecimal(String.valueOf(delay));
                     delay = decimal.subtract(new BigDecimal("0.1")).doubleValue();
-                    if (delay <=0) {
+                    if (delay <= 0) {
                         int randomX = random.nextInt(getBounds().width);
                         if (randomX + 64 > getBounds().width) randomX -= 64;
                         int randomY = random.nextInt(getBounds().height);
