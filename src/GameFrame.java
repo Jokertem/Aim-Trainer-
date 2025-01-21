@@ -58,6 +58,10 @@ public class GameFrame extends JFrame {
             DoubleShoot doubleShoot = new DoubleShoot(livesLabel, targetLabel);
             doubleShoot.setBounds(this.getBounds().width / 2 - 800 / 2, 130, 800, 500);
             add(doubleShoot);
+        } else if (Utils.selectedGame == GameTypes.FOLLOW.getName()) {
+            Follow follow = new Follow(timerLabel, targetLabel);
+            follow.setBounds(this.getBounds().width / 2 - 800 / 2, 130, 800, 500);
+            add(follow);
         }
 
         addWindowListener(new WindowAdapter() {

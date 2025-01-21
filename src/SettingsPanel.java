@@ -62,9 +62,12 @@ public class SettingsPanel extends JPanel {
         }
         for (Settings settings : Utils.settings) {
             if (Utils.selectedGame == GameTypes.CLASSIC.getName()) {
-                if (settings.getName() == "Target Duration") continue;
+                if (settings.getName() == "Target Duration" || settings.getName() == "Target Speed") continue;
             } else if (Utils.selectedGame == GameTypes.DOUBLESHOT.getName()) {
-                if (settings.getName() == "Target Delay") continue;
+                if (settings.getName() == "Target Delay" || settings.getName() == "Target Speed") continue;
+            } else if (Utils.selectedGame == GameTypes.FOLLOW.getName()) {
+                if (settings.getName() == "Target Delay" || settings.getName() == "Lives" || settings.getName() == "Target Duration")
+                    continue;
             }
             JPanel settingsPanel = new JPanel();
             JLabel label = new JLabel(settings.getName());
@@ -118,16 +121,19 @@ public class SettingsPanel extends JPanel {
             Utils.settings[0].setValue(5);
             Utils.settings[1].setValue(4.6);
             Utils.settings[2].setValue(4.0);
+            Utils.settings[3].setValue(1);
         }
         if (button.getText() == Difficulty.MEDIUM.toString()) {
             Utils.settings[0].setValue(3);
             Utils.settings[1].setValue(3.5);
             Utils.settings[2].setValue(3.6);
+            Utils.settings[3].setValue(3);
         }
         if (button.getText() == Difficulty.HARD.toString()) {
             Utils.settings[0].setValue(2);
             Utils.settings[1].setValue(2.8);
             Utils.settings[2].setValue(1.8);
+            Utils.settings[3].setValue(5);
         }
         render();
     }

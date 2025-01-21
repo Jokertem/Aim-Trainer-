@@ -6,7 +6,8 @@ public class Utils {
     public static Difficulty selectedDifficulty = Difficulty.MEDIUM;
     public static Settings[] settings = new Settings[]{new Settings("Lives", 3, 1, 6, true),
             new Settings("Target Delay", 3.0, 1.0, 5.5, false),
-            new Settings("Target Duration", 3.6, 1.2, 4.2, false)};
+            new Settings("Target Duration", 3.6, 1.2, 4.2, false),
+            new Settings("Target Speed", 3, 1, 6, true)};
     public static ImageIcon targetIcon = new ImageIcon(Utils.class.getResource("targets/Target1.png"));
     public static ImageIcon crosshairIcon = new ImageIcon(Utils.class.getResource("crosshairs/CrossHair1.png"));
     public static Color backgroundColor = new Color(214, 212, 122);

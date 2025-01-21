@@ -52,7 +52,7 @@ public class DoubleShoot extends JComponent {
                     targets.clear();
                     livesValue--;
                     livesLabel.setText("Lives: " + (int) livesValue);
-                    if (targets.size() <= 0) {
+                    if (targets.size() <= 0 && livesValue > 0) {
                         for (int i = 0; i < 2; i++) {
                             int randomX = random.nextInt(getBounds().width);
                             if (randomX + 64 > getBounds().width) randomX -= 64;
@@ -106,13 +106,12 @@ public class DoubleShoot extends JComponent {
                     if (targets.size() == 2 && target.getX() < e.getX() && target.getX() + target.getSize() > e.getX() &&
                             target.getY() < e.getY() && target.getY() + target.getSize() > e.getY()) {
                         targets.remove(target);
-                        System.out.println(2);
                     } else if (targets.size() == 1 && target.getX() < e.getX() && target.getX() + target.getSize() > e.getX() &&
                             target.getY() < e.getY() && target.getY() + target.getSize() > e.getY()) {
                         targets.remove(target);
                         Utils.targets++;
                         targetLabel.setText("Target: " + Utils.targets);
-                        if (targets.size() <= 0) {
+                        if (targets.isEmpty()) {
                             for (int j = 0; j < 2; j++) {
                                 int randomX = random.nextInt(getBounds().width);
                                 if (randomX + 64 > getBounds().width) randomX -= 64;
@@ -123,7 +122,6 @@ public class DoubleShoot extends JComponent {
                                 duration = Utils.settings[2].getValue();
 
                             }
-
 
                         }
                     }
