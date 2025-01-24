@@ -19,6 +19,7 @@ public class DoubleShoot extends JComponent {
     boolean start = false;
     Timer spawn;
     Timer game;
+    int click = 0;
 
     DoubleShoot(JLabel lives, JLabel target) {
         this.livesLabel = lives;
@@ -43,9 +44,10 @@ public class DoubleShoot extends JComponent {
         game = new Timer(25, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (livesValue <= 0) {
+                if (livesValue <= 0 && start) {
                     targets.clear();
                     start = false;
+                    click = 1;
                 }
 
                 if (duration <= 0 && targets.size() > 0) {
@@ -79,7 +81,12 @@ public class DoubleShoot extends JComponent {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mouseDragged(e);
-                if (!start) {
+                if (click > 0) {
+                    click--;
+                    System.out.println(click);
+                    return;
+                }
+                if (!start && click <= 0) {
                     Utils.targets = 0;
                     targetLabel.setText("Target: " + Utils.targets);
                     livesValue = Utils.settings[0].getValue();

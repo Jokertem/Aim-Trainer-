@@ -16,6 +16,7 @@ public class ClassicGame extends JComponent {
     boolean start = false;
     Timer spawn;
     Timer game;
+    int click = 0;
 
     ClassicGame(JLabel lives, JLabel target) {
         this.livesLabel = lives;
@@ -45,9 +46,10 @@ public class ClassicGame extends JComponent {
         game = new Timer(25, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (livesValue <= 0) {
+                if (livesValue <= 0 && start) {
                     targets.clear();
                     start = false;
+                    click = 1;
                 }
 
                 for (int i = 0; i < targets.size(); i++) {
@@ -74,7 +76,11 @@ public class ClassicGame extends JComponent {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mouseDragged(e);
-                if (!start) {
+                if (click > 0) {
+                    click--;
+                    return;
+                }
+                if (!start && click <= 0) {
                     Utils.targets = 0;
                     targetLabel.setText("Target: " + Utils.targets);
                     livesValue = Utils.settings[0].getValue();

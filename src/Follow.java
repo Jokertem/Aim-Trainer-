@@ -21,6 +21,7 @@ public class Follow extends JComponent {
     boolean start = false;
     Timer spawn;
     Timer game;
+    int click = 0;
 
     Follow(JLabel timer, JLabel target) {
         this.timerLabel = timer;
@@ -32,6 +33,7 @@ public class Follow extends JComponent {
                     if (time <= 1) {
                         targets.clear();
                         start = false;
+                        click = 2;
 
                     }
                     time--;
@@ -106,7 +108,11 @@ public class Follow extends JComponent {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mouseDragged(e);
-                if (!start) {
+                if (click > 0) {
+                    click--;
+                    return;
+                }
+                if (!start && click <= 0) {
                     Utils.targets = 0;
                     targetLabel.setText("Target: " + Utils.targets);
                     time = 90;
